@@ -1,3 +1,18 @@
 ToDo Liste
 
-- Prüfung der Laenge der Eingabe. 
+- Prüfung der Laenge der Eingabe.                DONE
+- Kürzen der Befehle auf maximal 10 Zeichen      DONE
+- Speicher überlegen (Vorschlag: Wie CSV Dateien mit "<Key>";"<Value>" DONE
+- commands set, get, exit umsetzen  30%
+- command list, der alles auflistet
+- command list <key>, der alle keys auflistet verfeinern
+- alias Befehl für die DB
+- Git Repo Online stellen
+- Alle Fehler geben erlaubte Zeichenlaenge zurück
+
+- wenn ein eintrag schon existiert - was mache ich dann?
+    - anzeigen lassen, dass dieser bereits existiert mit eintrag
+    - "Überschreiben?  <y/n>"
+
+- delete entry methode
+- liste muss mit indizes eingetragen sein DONE

@@ -2,38 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DB_FILE "db.txt"
-
 #include "error_input.h"
-
-void set_entry(const char *key, const char *value) {
-    FILE *fp = fopen(DB_FILE, "r+");
-    if (!fp) fp = fopen(DB_FILE, "w+"); // falls Datei nicht existiert
-
-    char line[MAX_LINE_LEN];
-    long pos;
-    int found = 0;
-
-    while (fgets(line, sizeof(line), fp)) {
-        pos = ftell(fp) - strlen(line); 
-        char current_key[MAX_KEY_LEN];
-        sscanf(line, "%[^:]", current_key);
-
-        if (strcmp(current_key, key) == 0) {
-            fseek(fp, pos, SEEK_SET);
-            fprintf(fp, "%-49s:%-99s\n", key, value);
-            found = 1;
-            break;
-        }
-    }
-
-    if (!found) {
-        fseek(fp, 0, SEEK_END); // ans Ende gehen
-        fprintf(fp, "%-49s:%-99s\n", key, value);
-    }
-
-    fclose(fp);
-}
+#include "set_entry.h"
+#include "STRUCTURE_PARAMETERS.h"
 
 void get_entry(const char *key) {
     FILE *fp = fopen(DB_FILE, "r");
@@ -42,7 +13,7 @@ void get_entry(const char *key) {
         return;
     }
 
-    char line[MAX_LINE_LEN];
+    char line[MAX_INPUT_LEN];
     while (fgets(line, sizeof(line), fp)) {
         char current_key[MAX_KEY_LEN];
         char value[MAX_VAL_LEN];
@@ -78,8 +49,8 @@ int check_key_value_for_length(const char *key, const char *value){
 }
 
 int parse_input(const char *input, char **command, char **key, char **value){
-    static char buffer[MAX_LINE_LEN];
-    strncpy(buffer, input, MAX_LINE_LEN - 1);
+    static char buffer[MAX_INPUT_LEN];
+    strncpy(buffer, input, MAX_INPUT_LEN - 1);
     buffer[MAX_LINE_LEN - 1] = '\0';
 
     *command = strtok(buffer, " ");
@@ -140,7 +111,7 @@ int handle_input(const char *input){
 int main() {
     printf("MiniDB gestartet. Befehle: set <key> <value>, get <key>, exit\n");
 
-    char input[MAX_LINE_LEN];
+    char input[MAX_INPUT_LEN];
     char command[MAX_COMMAND_LEN];
     char key_input[MAX_KEY_LEN];
     char value_input[MAX_VAL_LEN];
@@ -148,11 +119,20 @@ int main() {
     while (1) {
         printf("> ");
 
-        if (check_command(input, command, key_input, value_input) == -1) {
-            break;  
+        if (check_command(input, command, key_input, value_input) == CHECK_SKIP) {
+            continue;  
         }
 
-            printf("Command: '%s', Key: '%s', Value: '%s'\n", command, key_input, value_input);
+        printf("Command: '%s', Key: '%s', Value: '%s'\n", command, key_input, value_input);
+        
+        if (strcmp(command, "set") == 0) {
+            set_entry(key_input, value_input);
+        }
+
+        if (strcmp(command, "exit") == 0) {
+            break;
+        }
+        
         /*int result = handle_input(input);
 
         if (result == -1) {
