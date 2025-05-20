@@ -66,6 +66,8 @@ I have put this into my .sourcerc file and then run this to update the bashrc fi
 
 > source ~/.bashrc
 
+This file only has space for 999 entries, so that is something I intentionally left. I want to see, if I ever get to 1000 messages to check for its value. 
+
 # Notes
 This is a small CLI programm to store quick infos. This is not ment to be an actual db replacement. 
 I am very often inside the CMD, so I needed a tool to write stuff down real quick without opening another textfile all the time and anywhere.
