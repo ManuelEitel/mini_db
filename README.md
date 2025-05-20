@@ -57,6 +57,7 @@ Deleted entry: ID 003 | name = wrongname
 - Keys can only be 20 chars. If you want to change that, you can go into the STRUCTURE_PARAMETERS.h file and change the MAX_VAL_LEN. I personally wanted this whole programm small.
 - The Values can only be 123 chars. You can fix this in the STRUCTURE_PARAMETERS.h file with the value MAX_VAL_LEN. Again, I wanted a small tool to work quickly with! It escalades otherwise.
 - The symbol/char " is not allowed in the key, or value, since that is how I differentiate key and values. That is the only thing, that I don't check for. You can try to break the programm in any other way and I think I got all the possible errors. (Tell me, if you found a way to break the programm - I would be interested.)
+- This file only has space for 999 entries, so that is something I intentionally left. I want to see, if I ever get to 1000 messages to check for its value. 
 
 ### Here is my alias
 Copy this:
@@ -65,8 +66,6 @@ Copy this:
 I have put this into my .sourcerc file and then run this to update the bashrc file.
 
 > source ~/.bashrc
-
-This file only has space for 999 entries, so that is something I intentionally left. I want to see, if I ever get to 1000 messages to check for its value. 
 
 # Notes
 This is a small CLI programm to store quick infos. This is not ment to be an actual db replacement. 
