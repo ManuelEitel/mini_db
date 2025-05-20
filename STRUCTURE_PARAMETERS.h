@@ -1,9 +1,7 @@
 #ifndef STRUCTURE_PARAMETERS_H
 #define STRUCTURE_PARAMETERS_H
 
-
-
-#define DB_FILE "db.txt"
+#define DB_FILE "/home/manuel/Projekte/C_Programme/05_my_database/db.txt"
 #define MAX_COMMAND_LEN 8
 #define MAX_KEY_LEN     20 
 #define MAX_VAL_LEN     123

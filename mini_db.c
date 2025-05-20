@@ -8,7 +8,7 @@
 
 
 int main() {
-    printf("MiniDB gestartet. Befehle: set <key> <value>, get <key>, exit\n");
+    printf("MiniDB gestartet. Befehle: set <key> <value>, get <key>, listall, delete <id>, exit\n");
 
     char input[MAX_INPUT_LEN];
     char command[MAX_COMMAND_LEN];
@@ -29,18 +29,20 @@ int main() {
         if (strcmp(command, "get") == 0) {
             get_entry(key_input);
         }
-        
+       
+        if (strcmp(command, "listall") == 0) {
+            list_all_entries();
+        }
+    
+        if (strcmp(command, "delete") == 0) {
+            int id = atoi(key_input);  
+            delete_entry(id);
+        }
 
         if (strcmp(command, "exit") == 0) {
             break;
         }
         
-        /*int result = handle_input(input);
-
-        if (result == -1) {
-            break;
-        }*/
-
     }
     return 0;
 }

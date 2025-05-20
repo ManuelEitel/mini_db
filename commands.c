@@ -69,3 +69,80 @@ int get_entry(const char *key) {
     return found ? 1 : 0;
 }
 
+int list_all_entries() {
+    FILE *fp = fopen(DB_FILE, "r");
+    if (!fp) {
+        printf("No db file.\n");
+        return -1;
+    }
+    
+    char line[MAX_LINE_LEN];
+    int id;
+    char file_key[MAX_KEY_LEN];
+    char file_value[MAX_VAL_LEN];
+    int found = 0;
+
+    printf("+-----+--------+-------------------------\n");
+    printf("| ID  | KEY    | VALUE\n");
+    printf("+-----+--------+-------------------------\n");
+
+    while (fgets(line, sizeof(line), fp)) {
+        if (sscanf(line, "%3d;\"%[^\"]\";\"%[^\"]\"", &id, file_key, file_value) == 3) {
+            printf("| %03d | %-6s | %s\n", id, file_key, file_value);
+            found = 1;
+        }
+    }
+
+    printf("+-----+--------+-------------------------\n");
+
+    fclose(fp);
+
+    if (!found) {
+        printf("No entries in database.\n");
+    }
+
+    return found ? 1 : 0;
+}
+
+int delete_entry(int target_id) {
+    FILE *fp = fopen(DB_FILE, "r");
+    if (!fp) {
+        printf("No db file.\n");
+    }
+
+    FILE *temp_fp = fopen("temp_db.txt", "w");
+    if (!temp_fp) {
+        fclose(fp);
+        printf("Could not create temporary file.\n");
+    }
+
+    char line[MAX_LINE_LEN];
+    int id;
+    char file_key[MAX_KEY_LEN];
+    char file_value[MAX_VAL_LEN];
+    int found = 0;
+
+    while (fgets(line, sizeof(line), fp)) {
+         if (sscanf(line, "%3d;\"%[^\"]\";\"%[^\"]\"", &id, file_key, file_value) == 3) {
+            if (id == target_id) {
+                printf("Deleted entry: ID %03d | %s = %s\n", id, file_key, file_value);
+                found = 1;
+                continue; // Skip this line
+            }
+        }
+        fputs(line, temp_fp); // Keep all other lines
+    }
+
+    fclose(fp);
+    fclose(temp_fp);
+
+    if (found) {
+        remove(DB_FILE);
+        rename("temp_db.txt", DB_FILE);
+        return 1;
+    } else {
+        remove("temp_db.txt");
+        printf("No entry found with ID %03d.\n", target_id);
+        return 0;
+    }
+}
