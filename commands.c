@@ -27,4 +27,45 @@ int set_entry(const char *key, const char *value) {
     return 1;
 }
 
+int get_entry(const char *key) {
+    FILE *fp = fopen(DB_FILE, "r");
+    if (!fp) {
+        printf("No db file.\n");
+        return -1;
+    }
+
+    char line[MAX_LINE_LEN];
+    int id;
+    char file_key[MAX_KEY_LEN];
+    char file_value[MAX_VAL_LEN];
+    int found = 0;
+    
+    int format_used = 0;
+    while (fgets(line, sizeof(line), fp)) {
+        if (sscanf(line, "%3d;\"%[^\"]\";\"%[^\"]\"", &id, file_key, file_value) == 3) {
+            if (strcmp(file_key, key) == 0) {
+                if (!format_used) {
+                    printf("+-----+----------------+\n");
+                    printf("| ID  | VALUE          |\n");
+                    printf("+-----+----------------+\n");
+                    format_used = 1;
+                }
+
+                printf("| %03d | %-14s\n", id, file_value);
+                found = 1;
+            }
+        }
+    }
+
+    if (format_used) {
+        printf("+-----+----------------+\n");
+    }
+
+    fclose(fp);
+
+    if (!found) {
+        printf("No entries found for key: %s\n", key);
+    }
+    return found ? 1 : 0;
+}
 

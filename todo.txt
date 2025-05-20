@@ -1,23 +1,24 @@
-ToDo Liste
+#ToDo Liste
 
-- Prüfung der Laenge der Eingabe.                DONE
-- Kürzen der Befehle auf maximal 10 Zeichen      DONE
-- Speicher überlegen (Vorschlag: Wie CSV Dateien mit "<Key>";"<Value>" DONE
+--------------------------Für Version 1.0----------------------------------
+- Prüfung der Laenge der Eingabe.                                       DONE
+- Kürzen der Befehle auf maximal 10 Zeichen                             DONE
+- Speicher überlegen (Vorschlag: Wie CSV Dateien mit "<Key>";"<Value>"  DONE
 - commands set, get, exit umsetzen  30%
-    - set DONE
-    - get
-    - exit DONE
-- command list, der alles auflistet
-- command list <key>, der alle keys auflistet verfeinern
-- alias Befehl für die DB
-- Git Repo Online stellen
-    - offline git erzeugt
-- Alle Fehler geben erlaubte Zeichenlaenge zurück
-
+    - set                                                               DONE
+    - get                                                               DONE
+    - exit                                                              DONE
+- command list, der alles auflistet                                     DONE
+- alias Befehl für die DB                                               OPEN
+- offline git erzeugt                                                   DONE
+- Alle Fehler geben erlaubte Zeichenlaenge zurück                       OPEN
 - wenn ein eintrag schon existiert - was mache ich dann?
-    - anzeigen lassen, dass dieser bereits existiert mit eintrag DONE
-    - "Überschreiben?  <y/n>" NEIN ALSO DONE
+    - anzeigen lassen, dass dieser bereits existiert mit eintrag        DONE
+    - "Überschreiben?  <y/n>" NEIN ALSO                                 DONE
+- delete entry methode                                                  OPEN
+- liste muss mit indizes eingetragen sein                               DONE
 
+
+-------------------------Für Version 1.1-----------------------------------
 - logging
-- delete entry methode
-- liste muss mit indizes eingetragen sein DONE
+- Git Repo Online stellen
