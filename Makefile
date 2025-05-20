@@ -10,13 +10,14 @@ TARGET = mini_db
 # Quelldateien
 SRCS = mini_db.c
 SRCS_ERROR = error_input.c
-SRCS_SET_ENTRY = set_entry.c
+SRCS_COMMANDS = commands.c
+SRCS_ENTRY_IO = entry_io.c
 
 # Standart Ziel
 all: $(TARGET)
 
 $(TARGET): $(SRC)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) $(SRCS_ERROR) $(SRCS_SET_ENTRY)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) $(SRCS_ERROR) $(SRCS_COMMANDS) $(SRCS_ENTRY_IO)
 
 # Aufräumen
 clean:

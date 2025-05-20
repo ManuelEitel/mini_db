@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "error_input.h"
-#include "set_entry.h"
+#include "commands.h"
 #include "STRUCTURE_PARAMETERS.h"
 
 void get_entry(const char *key) {
